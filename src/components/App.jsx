@@ -1,11 +1,13 @@
 import { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import ContactsList from './ContactsList/ContactsList';
+import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
     contacts: [],
+    filter: '',
   };
 
   createContacts = dataForm => {
@@ -37,11 +39,11 @@ export class App extends Component {
   };
 
   render() {
-    // const { contacts, filter } = this.state;
+    const { contacts, filter } = this.state;
 
-    // const filteredContacts = contacts.filter(contact =>
-    //   contact.name.toLowerCase().includes(filter.toLowerCase())
-    // );
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
     return (
       <>
         <div>
@@ -49,11 +51,11 @@ export class App extends Component {
           <ContactForm createContacts={this.createContacts}></ContactForm>
 
           <h2>Contacts</h2>
-
+          <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
           <ContactsList
             contacts={this.state.contacts}
             deleteContacts={this.deleteContacts}
-            //filteredContacts={filteredContacts}
+            filteredContacts={filteredContacts}
           ></ContactsList>
         </div>
       </>

@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 const INITIAL_STATE = {
   name: '',
-  phone: '',
+  number: '',
 };
 
 class ContactForm extends Component {
@@ -35,7 +35,7 @@ class ContactForm extends Component {
           Number
           <input
             type="tel"
-            name="phone"
+            name="number"
             placeholder="Enter phone number"
             value={this.state.number}
             onChange={this.handleInputChange}
