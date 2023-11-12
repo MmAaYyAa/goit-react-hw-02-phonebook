@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
+import ContactsList from './ContactsList/ContactsList';
 
 export class App extends Component {
   state = {
@@ -16,11 +17,25 @@ export class App extends Component {
     return !isExistContact;
   };
 
+  handleRemoveContact = id => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   render() {
+    const { contacts } = this.state;
     return (
       <>
         <h2>Phonebook</h2>
-        <ContactForm onAdd={this.handleAddContact}></ContactForm>
+        <ContactForm
+          onAdd={this.handleAddContact}
+          onCheckUnique={this.handleCheckUniqueContact}
+        ></ContactForm>
+        <ContactsList
+          contacts={contacts}
+          onRemove={this.handleRemoveContact}
+        ></ContactsList>
       </>
     );
   }

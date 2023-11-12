@@ -9,55 +9,39 @@ const INITIAL_STATE = {
 class ContactForm extends Component {
   state = INITIAL_STATE;
 
-  handleChangeForm = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value.trim() });
   };
 
-  handleFormSumit = e => {
-    e.preventDefault();
-    const { name, phone } = this.state;
-    const { onAdd } = this.props;
-    const isValidatedForm = this.validateForm();
-
-    if (!isValidatedForm) {
-      return;
-    }
-
-    onAdd({ id: nanoid(), name, phone });
-  };
-
-  validateForm = () => {
-    const { name, phone } = this.state;
-    const { onCheckUnique } = this.props;
-    if (!name || !phone) {
-      alert('Some fields are empty');
-      return false;
-    }
-    return onCheckUnique(name);
-  };
-
-  resetForm = () => {
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.props.createContacts(this.state);
     this.setState(INITIAL_STATE);
   };
+
   render() {
-    const { name, phone } = this.state;
     return (
-      <form>
-        <input
-          type="text"
-          name="name"
-          placeholder="Enter name"
-          value={name}
-          onChange
-        ></input>
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Enter phone number"
-          value={phone}
-          onChange
-        ></input>
+      <form onSubmit={this.handleFormSubmit}>
+        <label>
+          Name
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter name"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          ></input>
+        </label>
+        <label>
+          Number
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Enter phone number"
+            value={this.state.number}
+            onChange={this.handleInputChange}
+          ></input>
+        </label>
         <button type="submit">Add contact</button>
       </form>
     );

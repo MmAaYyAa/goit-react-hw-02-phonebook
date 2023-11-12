@@ -1,12 +1,12 @@
 const ContactListItem = ({ name, phone, onRemove }) => {
   return (
     <li>
-      {name}: {phone} <button onClick={() => onRemove(id)}>Delete</button>{' '}
+      {name}: {phone} <button onClick={() => onRemove()}>Delete</button>{' '}
     </li>
   );
 };
 
-const ContactList = ({ contacts, onRemove }) => {
+const ContactsList = ({ contacts, onRemove }) => {
   if (contacts.length === 0) {
     return null;
   }
@@ -19,7 +19,7 @@ const ContactList = ({ contacts, onRemove }) => {
   );
 };
 
-export default ContactList;
+export default ContactsList;
 
 // const ContactList = ({ contacts, onRemove }) =>
 //   contacts.length > 0 && (
