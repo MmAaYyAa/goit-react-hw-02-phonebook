@@ -1,21 +1,16 @@
-const ContactListItem = ({ name, phone, onRemove }) => {
-  return (
-    <li>
-      {name}: {phone} <button onClick={() => onRemove()}>Delete</button>{' '}
-    </li>
-  );
-};
+import Contact from 'components/Contact/Contact';
 
-const ContactsList = ({ contacts, onRemove }) => {
-  if (contacts.length === 0) {
-    return null;
-  }
+const ContactsList = ({ contacts, filteredContacts, deleteContacts }) => {
   return (
-    <ul>
-      {contacts.map(contact => (
-        <ContactListItem {...contacts} onRemove={onRemove} />
+    <div>
+      {(filteredContacts ?? contacts).map(contact => (
+        <Contact
+          deleteContacts={deleteContacts}
+          contact={contact}
+          key={contact.id}
+        />
       ))}
-    </ul>
+    </div>
   );
 };
 
