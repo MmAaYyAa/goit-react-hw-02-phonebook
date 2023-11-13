@@ -47,10 +47,10 @@ export class App extends Component {
     return (
       <>
         <div>
-          <h1>Phonebook</h1>
+          {/* <h1>Phonebook</h1> */}
           <ContactForm createContacts={this.createContacts}></ContactForm>
 
-          <h2>Contacts</h2>
+          {/* <h2>Contacts</h2> */}
           <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
           <ContactsList
             contacts={this.state.contacts}
