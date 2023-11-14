@@ -21,15 +21,6 @@ class ContactForm extends Component {
     event.preventDefault();
     this.props.createContacts(this.state);
     this.setState(INITIAL_STATE);
-    const isValidatedForm = this.validateForm();
-  };
-
-  validateForm = () => {
-    const { name, number } = this.state;
-    if (!name || !number) {
-      alert('Some fields are empty');
-      return false;
-    }
   };
 
   render() {
@@ -40,21 +31,25 @@ class ContactForm extends Component {
           <label>
             Name
             <Input
+              onChange={this.handleInputChange}
               type="text"
               name="name"
               placeholder="Enter name"
               value={this.state.name}
-              onChange={this.handleInputChange}
+              pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              required
             ></Input>
           </label>
           <label>
             Number
             <Input
+              onChange={this.handleInputChange}
               type="tel"
               name="number"
               placeholder="Enter phone number"
               value={this.state.number}
-              onChange={this.handleInputChange}
+              pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+              required
             ></Input>
           </label>
           <ContactFormButton type="submit">Add contact</ContactFormButton>
