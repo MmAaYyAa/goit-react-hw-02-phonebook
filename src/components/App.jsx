@@ -12,7 +12,7 @@ export class App extends Component {
 
   createContacts = dataForm => {
     const existingContact = this.state.contacts.find(
-      contact => contact.name === dataForm.name
+      contact => contact.name.toLowerCase() === dataForm.name.toLowerCase()
     );
     if (existingContact) {
       return alert(`${dataForm.name} is already in contacts`);
